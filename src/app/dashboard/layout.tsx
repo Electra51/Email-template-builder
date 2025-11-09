@@ -20,7 +20,7 @@
 // }
 
 // app/dashboard/layout.tsx
-import Sidebar from "@/components/Dashboard/Sidebar";
+import Sidebar from "../../components/Dashboard/Sidebar";
 import React from "react";
 
 export default function DashboardLayout({

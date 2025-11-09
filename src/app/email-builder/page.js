@@ -1,4 +1,4 @@
-import EmailTemplateBuilder from "@/components/EmailTemplateBuilder";
+import EmailTemplateBuilder from "../../components/EmailTemplateBuilder";
 import React from "react";
 
 const EmailPage = () => {
