@@ -1,30 +1,25 @@
-// /** @type {import('next').NextConfig} */
 // const nextConfig = {
 //   images: {
-//     remotePatterns: [
-//       {
-//         protocol: "https",
-//         hostname: "fakestoreapi.com",
-//         port: "",
-//         pathname: "/**",
-//       },
-//       {
-//         protocol: "https",
-//         hostname: "via.placeholder.com",
-//         port: "",
-//         pathname: "/**",
-//       },
-//     ],
+//     unoptimized: true,
 //   },
 //   reactCompiler: true,
 // };
-
 // export default nextConfig;
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    unoptimized: true,
+    unoptimized: true, // তুমি আগেই রেখেছো, optional
   },
-  reactCompiler: true,
+  reactCompiler: true, // Next.js compiler optimization
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
+      use: ["@svgr/webpack"], // SVG → React component বানাবে
+    });
+    return config;
+  },
 };
+
 export default nextConfig;
