@@ -56,9 +56,11 @@ const Navbar = () => {
               className="text-purple-400 hover:text-purple-300 transition tracking-wider">
               Sign In
             </Link>
-            <button className="bg-linear-to-r from-purple-500 to-pink-500 px-6 py-2 rounded-lg hover:shadow-lg hover:shadow-purple-500/50 transition transform hover:scale-105 tracking-wider font-medium">
+            <Link
+              href={"/signup"}
+              className="bg-linear-to-r from-purple-500 to-pink-500 px-6 py-2 rounded-lg hover:shadow-lg hover:shadow-purple-500/50 transition transform hover:scale-105 tracking-wider font-medium">
               Get Started
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -96,9 +98,11 @@ const Navbar = () => {
             <button className="block w-full text-left text-purple-400 hover:text-purple-300 transition tracking-wider">
               Sign In
             </button>
-            <button className="block w-full bg-linear-to-r from-purple-500 to-pink-500 px-6 py-2 rounded-lg tracking-wider font-medium">
+            <Link
+              href={"/signup"}
+              className="block w-full bg-linear-to-r from-purple-500 to-pink-500 px-6 py-2 rounded-lg tracking-wider font-medium">
               Get Started
-            </button>
+            </Link>
           </div>
         </div>
       )}
