@@ -128,7 +128,7 @@ const SocialProofBanner = () => {
                 </span>{" "}
                 marketers
               </div>
-              <div className="text-sm text-slate-400 flex items-center gap-2">
+              <div className="text-sm text-slate-200 flex items-center gap-2">
                 <span>Growing their business with EmailCraft</span>
                 <div className="flex items-center gap-1">
                   {[1, 2, 3, 4, 5].map((star) => (
@@ -145,7 +145,7 @@ const SocialProofBanner = () => {
                 {trustBadges.map((badge, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-1 text-xs text-slate-400 bg-slate-800/50 px-2 py-1 rounded-full border border-purple-500/20">
+                    className="flex items-center gap-1 text-xs text-slate-300 bg-slate-800/50 px-2 py-1 rounded-full border border-purple-500/20">
                     {badge.icon}
                     <span>{badge.text}</span>
                   </div>
@@ -177,10 +177,10 @@ const SocialProofBanner = () => {
                     <div className={`font-bold text-xl ${metric.color}`}>
                       {metric.value}
                     </div>
-                    <div className="text-sm font-medium text-slate-300 whitespace-nowrap">
+                    <div className="text-sm font-medium text-slate-200 whitespace-nowrap">
                       {metric.label}
                     </div>
-                    <div className="text-xs text-slate-500 mt-1">
+                    <div className="text-xs text-slate-300 mt-1">
                       {metric.description}
                     </div>
                   </div>
@@ -195,7 +195,7 @@ const SocialProofBanner = () => {
 
         {/* Bottom Ticker - Company Logos/Names (Optional) */}
         <div className="mt-8 pt-6 border-t border-purple-500/10">
-          <div className="text-center text-xs text-slate-500 mb-4">
+          <div className="text-center text-xs text-slate-200 mb-4">
             Trusted by leading companies worldwide
           </div>
           <div className="flex flex-wrap justify-center items-center gap-8 opacity-50">
@@ -208,7 +208,7 @@ const SocialProofBanner = () => {
             ].map((company, i) => (
               <div
                 key={i}
-                className="text-slate-600 font-semibold hover:text-slate-400 transition-colors cursor-pointer">
+                className="text-slate-300 font-semibold hover:text-slate-400 transition-colors cursor-pointer">
                 {company}
               </div>
             ))}

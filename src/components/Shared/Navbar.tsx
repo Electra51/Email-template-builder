@@ -3,6 +3,7 @@
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import Logo from "../../assets/logoBold.svg";
+import Link from "next/link";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -37,23 +38,25 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-8">
             <a
               href="#features"
-              className="hover:text-purple-400 transition navMenu tracking-wider">
+              className="hover:text-purple-400 transition tracking-wider">
               Features
             </a>
             <a
               href="#pricing"
-              className="hover:text-purple-400 transition navMenu tracking-wider">
+              className="hover:text-purple-400 transition tracking-wider">
               Pricing
             </a>
             <a
               href="#testimonials"
-              className="hover:text-purple-400 transition navMenu tracking-wider">
+              className="hover:text-purple-400 transition tracking-wider">
               Testimonials
             </a>
-            <button className="text-purple-400 hover:text-purple-300 transition navMenu tracking-wider">
+            <Link
+              href={"/login"}
+              className="text-purple-400 hover:text-purple-300 transition tracking-wider">
               Sign In
-            </button>
-            <button className="bg-linear-to-r from-purple-500 to-pink-500 px-6 py-2 rounded-lg hover:shadow-lg hover:shadow-purple-500/50 transition transform hover:scale-105 navMenu tracking-wider">
+            </Link>
+            <button className="bg-linear-to-r from-purple-500 to-pink-500 px-6 py-2 rounded-lg hover:shadow-lg hover:shadow-purple-500/50 transition transform hover:scale-105 tracking-wider font-medium">
               Get Started
             </button>
           </div>
@@ -77,23 +80,23 @@ const Navbar = () => {
           <div className="px-4 py-6 space-y-4">
             <a
               href="#features"
-              className="block hover:text-purple-400 transition navMenu tracking-wider">
+              className="block hover:text-purple-400 transition tracking-wider">
               Features
             </a>
             <a
               href="#pricing"
-              className="block hover:text-purple-400 transition navMenu tracking-wider">
+              className="block hover:text-purple-400 transition tracking-wider">
               Pricing
             </a>
             <a
               href="#testimonials"
-              className="block hover:text-purple-400 transition navMenu tracking-wider">
+              className="block hover:text-purple-400 transition tracking-wider">
               Testimonials
             </a>
-            <button className="block w-full text-left text-purple-400 hover:text-purple-300 transition navMenu tracking-wider">
+            <button className="block w-full text-left text-purple-400 hover:text-purple-300 transition tracking-wider">
               Sign In
             </button>
-            <button className="block w-full bg-linear-to-r from-purple-500 to-pink-500 px-6 py-2 rounded-lg navMenu tracking-wider">
+            <button className="block w-full bg-linear-to-r from-purple-500 to-pink-500 px-6 py-2 rounded-lg tracking-wider font-medium">
               Get Started
             </button>
           </div>

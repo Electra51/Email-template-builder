@@ -1,7 +1,8 @@
 import React from "react";
+import LoginPage from "../../../components/AuthPage/LoginPage";
 
 const Login = () => {
-  return <div>Login</div>;
+  return <LoginPage />;
 };
 
 export default Login;

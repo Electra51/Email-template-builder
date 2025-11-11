@@ -17,7 +17,7 @@ const LiveDemo = () => {
           </p>
         </div>
 
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="relative aspect-video bg-linear-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700 overflow-hidden group cursor-pointer">
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-20 h-20 bg-linear-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center group-hover:scale-110 transition shadow-2xl shadow-purple-500/50">

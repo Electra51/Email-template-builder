@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react-hooks/immutability */
+
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Star,
   Quote,
@@ -123,7 +123,7 @@ const Testimonials = () => {
         </div>
 
         {/* Main Testimonial Card */}
-        <div className="max-w-5xl mx-auto mb-12">
+        <div className="max-w-7xl mx-auto mb-12">
           <div className="relative group">
             {/* Glow Effect */}
             <div

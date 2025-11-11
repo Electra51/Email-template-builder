@@ -73,13 +73,13 @@ export default function Hero() {
           }`}>
           <div className="inline-flex items-center space-x-2 bg-linear-to-r from-purple-500/20 via-pink-500/20 to-purple-500/20 border border-purple-500/30 rounded-full px-5 py-2.5 text-sm font-medium backdrop-blur-sm hover:scale-105 transition-transform cursor-pointer group">
             <Sparkles className="w-4 h-4 text-purple-400 group-hover:rotate-12 transition-transform" />
-            <span className="bg-linear-to-r from-purple-200 to-pink-200 bg-clip-text text-transparent navMenu tracking-wider">
+            <span className="bg-linear-to-r from-purple-200 to-pink-200 bg-clip-text text-transparent  tracking-wider">
               Trusted by 50,000+ marketers worldwide
             </span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight navMenu">
-            <span className="block mb-[-5px]">Email Marketing</span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight ">
+            <span className="-mb-2.5">Email Marketing</span>
             <span className="block bg-linear-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-gradient bg-size-[200%_auto]">
               Made Simple
             </span>
@@ -114,7 +114,7 @@ export default function Hero() {
                 key={index}
                 className="flex items-center space-x-2 text-sm text-slate-400">
                 <CheckCircle className="w-4 h-4 text-green-400" />
-                <span className="navMenu tracking-wider">{feature}</span>
+                <span className=" tracking-wider">{feature}</span>
               </div>
             ))}
           </div>
