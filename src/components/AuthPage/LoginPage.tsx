@@ -61,7 +61,6 @@ export default function LoginPage() {
 
       if (response.ok) {
         localStorage.setItem("token", data.token);
-
         alert("Login successful!");
 
         router.push("/dashboard");

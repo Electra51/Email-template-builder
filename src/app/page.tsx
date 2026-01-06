@@ -21,7 +21,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <SocialProofBanner />
-      <Features />
+      {/* <Features />
       <Pricing />
       <Testimonials />
       <Integrations />
@@ -29,7 +29,7 @@ export default function Home() {
       <LiveDemo />
       <FAQ />
       <CTA />
-      <Footer />
+      <Footer /> */}
     </main>
   );
 }

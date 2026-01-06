@@ -1,7 +1,8 @@
 "use client";
 
 import { ArrowRight, Sparkles, Play, CheckCircle } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
+import HeroBackground from "./HeroBackground";
 
 export default function Hero() {
   const [count, setCount] = useState({ emails: 0, users: 0 });
@@ -9,8 +10,6 @@ export default function Hero() {
 
   useEffect(() => {
     setIsVisible(true);
-
-    // Animated counter for stats
     const emailTarget = 10;
     const userTarget = 50;
     const duration = 2000;
@@ -61,19 +60,15 @@ export default function Hero() {
 
   return (
     <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-      </div>
-
+     <HeroBackground />
       <div className="max-w-7xl mx-auto relative z-10">
         <div
           className={`text-center space-y-8 transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}>
-          <div className="inline-flex items-center space-x-2 bg-linear-to-r from-purple-500/20 via-pink-500/20 to-purple-500/20 border border-purple-500/30 rounded-full px-5 py-2.5 text-sm font-medium backdrop-blur-sm hover:scale-105 transition-transform cursor-pointer group">
-            <Sparkles className="w-4 h-4 text-purple-400 group-hover:rotate-12 transition-transform" />
-            <span className="bg-linear-to-r from-purple-200 to-pink-200 bg-clip-text text-transparent  tracking-wider">
+          <div className="inline-flex items-center mt-16 space-x-2 bg-linear-to-r from-purple-500/20 via-pink-500/20 to-purple-500/20 border border-purple-500/30 rounded-full px-5 py-2.5 text-sm font-medium backdrop-blur-sm cursor-pointer group">
+            <Sparkles className="w-4 h-4 text-purple-400" />
+            <span suppressHydrationWarning className="bg-linear-to-r from-purple-200 to-pink-200 bg-clip-text text-transparent text-xs tracking-wider">
               Trusted by 50,000+ marketers worldwide
             </span>
           </div>
@@ -85,15 +80,15 @@ export default function Hero() {
             </span>
           </h1>
 
-          {/* Description */}
+       
           <p className="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed fontInter tracking-wider">
             Create, send, and track beautiful email campaigns with our powerful
             drag-and-drop builder. No design skills required.
           </p>
 
-          {/* CTA Buttons */}
+       
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-            <button className="group relative bg-linear-to-r from-purple-500 to-pink-500 px-8 py-4 rounded-xl text-lg font-semibold hover:shadow-2xl hover:shadow-purple-500/50 transition-all transform hover:scale-105 flex items-center space-x-2 overflow-hidden">
+            <button className="group relative bg-linear-to-r from-purple-500 to-pink-500 px-8 py-4 rounded-xl text-lg font-semibold hover:shadow-2xl hover:shadow-purple-500/50 transition-all transform flex items-center space-x-2 overflow-hidden">
               <span className="relative z-10 fontInter tracking-wider">
                 Start Free Trial
               </span>
@@ -211,7 +206,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <style jsx>{`
+      {/* <style jsx>{`
         @keyframes gradient {
           0% {
             background-position: 0% 50%;
@@ -226,7 +221,7 @@ export default function Hero() {
         .animate-gradient {
           animation: gradient 3s ease infinite;
         }
-      `}</style>
+      `}</style> */}
     </section>
   );
 }

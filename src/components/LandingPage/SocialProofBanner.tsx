@@ -10,6 +10,7 @@ import {
   Award,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import HeroBackground from "./HeroBackground";
 
 const SocialProofBanner = () => {
   const [activeUsers, setActiveUsers] = useState(50000);
@@ -71,27 +72,14 @@ const SocialProofBanner = () => {
 
   return (
     <section className="relative py-12 px-4 sm:px-6 lg:px-8 bg-linear-to-r from-purple-900/30 via-pink-900/30 to-purple-900/30 border-y border-purple-500/20 overflow-hidden">
-      {/* Animated Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, rgba(168, 85, 247, 0.4) 1px, transparent 0)`,
-            backgroundSize: "40px 40px",
-          }}></div>
-      </div>
-
-      {/* Floating Particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-32 h-32 bg-pink-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-      </div>
+      <HeroBackground />
 
       <div className="max-w-[1190px] mx-auto relative z-10 px-4 sm:px-6 lg:px-6">
         <div
           className={`flex flex-col lg:flex-row items-center justify-between gap-8 transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-          }`}>
+          }`}
+        >
           <div className="flex flex-col sm:flex-row items-center gap-6 flex-1">
             <div className="relative group">
               <div className="flex -space-x-3">
@@ -103,12 +91,9 @@ const SocialProofBanner = () => {
                       animationDelay: `${i * 100}ms`,
                       transitionDelay: `${i * 50}ms`,
                     }}
-                    title={avatar.name}>
+                    title={avatar.name}
+                  >
                     {avatar.initials}
-
-                    {/* Glow effect on hover */}
-                    <div
-                      className={`absolute inset-0 bg-linear-to-br ${avatar.color} rounded-full blur-md opacity-0 group-hover:opacity-50 transition-opacity -z-10`}></div>
                   </div>
                 ))}
               </div>
@@ -145,7 +130,8 @@ const SocialProofBanner = () => {
                 {trustBadges.map((badge, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-1 text-xs text-slate-300 bg-slate-800/50 px-2 py-1 rounded-full border border-purple-500/20">
+                    className="flex items-center gap-1 text-xs text-slate-300 bg-slate-800/50 px-2 py-1 rounded-full border border-purple-500/20"
+                  >
                     {badge.icon}
                     <span>{badge.text}</span>
                   </div>
@@ -160,15 +146,18 @@ const SocialProofBanner = () => {
               <div
                 key={i}
                 className="group relative bg-slate-800/50 backdrop-blur-sm border border-purple-500/20 rounded-xl p-4 hover:border-purple-500/50 transition-all hover:scale-105 hover:shadow-lg min-w-[140px]"
-                style={{ animationDelay: `${i * 150}ms` }}>
+                style={{ animationDelay: `${i * 150}ms` }}
+              >
                 {/* Background Glow */}
                 <div
-                  className={`absolute inset-0 bg-linear-to-br ${metric.bgColor} opacity-0 group-hover:opacity-100 rounded-xl blur-xl transition-opacity -z-10`}></div>
+                  className={`absolute inset-0 bg-linear-to-br ${metric.bgColor} opacity-0 group-hover:opacity-100 rounded-xl blur-xl transition-opacity -z-10`}
+                ></div>
 
                 <div className="flex items-start gap-3">
                   {/* Icon */}
                   <div
-                    className={`${metric.color} group-hover:scale-110 transition-transform`}>
+                    className={`${metric.color} group-hover:scale-110 transition-transform`}
+                  >
                     {metric.icon}
                   </div>
 
@@ -208,28 +197,14 @@ const SocialProofBanner = () => {
             ].map((company, i) => (
               <div
                 key={i}
-                className="text-slate-300 font-semibold hover:text-slate-400 transition-colors cursor-pointer">
+                className="text-slate-300 font-semibold hover:text-slate-400 transition-colors cursor-pointer"
+              >
                 {company}
               </div>
             ))}
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-10px);
-          }
-        }
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-      `}</style>
     </section>
   );
 };

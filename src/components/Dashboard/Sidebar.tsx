@@ -6,7 +6,7 @@ import React from "react";
 
 const menu = [
   { name: "Overview", path: "/dashboard" },
-  { name: "Posts", path: "/dashboard/posts" },
+  { name: "Email-Template-Builder", path: "/dashboard/posts" },
   { name: "Users", path: "/dashboard/users" },
   { name: "Settings", path: "/dashboard/settings" },
 ];

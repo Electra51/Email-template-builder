@@ -1,7 +1,8 @@
 import React from "react";
+import EmailTemplateBuilder from "../../../components/EmailTemplateBuilder";
 
 const PostPage = () => {
-  return <div>PostPage</div>;
+  return <EmailTemplateBuilder/>
 };
 
 export default PostPage;

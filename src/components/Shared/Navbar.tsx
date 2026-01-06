@@ -26,15 +26,14 @@ const Navbar = () => {
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <div className="flex items-center">
+          <Link href={"/"} className="flex items-center">
             <Logo />
-
             <span className="text-2xl font-bold bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mt-8 fontInter tracking-wider">
               Craft
             </span>
-          </div>
+          </Link >
 
-          {/* Desktop Menu */}
+         
           <div className="hidden md:flex items-center space-x-8">
             <a
               href="#features"
@@ -63,7 +62,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* mobile menu btn */}
           <button
             className="md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
@@ -76,7 +75,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* mobile menu */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-slate-900 border-t border-slate-800">
           <div className="px-4 py-6 space-y-4">
