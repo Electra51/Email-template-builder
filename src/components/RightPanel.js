@@ -1,5 +1,7 @@
+import { List, ListOrdered, TextAlignCenter, TextAlignEnd, TextAlignStart } from "lucide-react";
+
 const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
-    if (!selectedComponent) {
+  if (!selectedComponent) {
     return (
       <div className="w-80 bg-white border-l border-gray-200 p-4">
         <p className="text-gray-500 text-center">Select a component to edit</p>
@@ -7,7 +9,7 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
     );
   }
 
- const { type, props } = selectedComponent;
+  const { type, props } = selectedComponent;
   return (
     <div className="w-80 bg-white border-l border-gray-200 overflow-auto">
       <div className="p-4">
@@ -55,8 +57,7 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                 onChange={(e) =>
                   updateComponentProp(selectedId, "fontFamily", e.target.value)
                 }
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
-              >
+                className="w-full px-3 py-2 border border-gray-300 rounded text-sm">
                 <option value="Arial, sans-serif">Arial</option>
                 <option value="Helvetica, sans-serif">Helvetica</option>
                 <option value="Times New Roman, serif">Times New Roman</option>
@@ -74,8 +75,7 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                 onChange={(e) =>
                   updateComponentProp(selectedId, "fontWeight", e.target.value)
                 }
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
-              >
+                className="w-full px-3 py-2 border border-gray-300 rounded text-sm">
                 <option value="lighter">Lighter</option>
                 <option value="normal">Normal</option>
                 <option value="bold">Bold</option>
@@ -148,8 +148,7 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                     selectedComponent.props.alignment === "left"
                       ? "bg-purple-500 text-white border-purple-500"
                       : "border-gray-300 hover:bg-gray-50"
-                  }`}
-                >
+                  }`}>
                   Left
                 </button>
                 <button
@@ -160,8 +159,7 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                     selectedComponent.props.alignment === "center"
                       ? "bg-purple-500 text-white border-purple-500"
                       : "border-gray-300 hover:bg-gray-50"
-                  }`}
-                >
+                  }`}>
                   Center
                 </button>
                 <button
@@ -172,69 +170,70 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                     selectedComponent.props.alignment === "right"
                       ? "bg-purple-500 text-white border-purple-500"
                       : "border-gray-300 hover:bg-gray-50"
-                  }`}
-                >
+                  }`}>
                   Right
                 </button>
               </div>
             </div>
 
-         <div>
+            <div>
+              <h3 className="text-sm font-bold mb-4 text-gray-800 uppercase">
+                Line Height
+              </h3>
+              <select
+                value={selectedComponent.props.lineHeight || "1.5"}
+                onChange={(e) =>
+                  updateComponentProp(selectedId, "lineHeight", e.target.value)
+                }
+                className="w-full px-3 py-2 border border-gray-300 rounded text-sm">
+                <option value="1">1</option>
+                <option value="1.2">1.2</option>
+                <option value="1.5">1.5</option>
+                <option value="1.8">1.8</option>
+                <option value="2">2</option>
+              </select>
+              <div>
+                <h3 className="text-sm font-bold mb-4 text-gray-800 uppercase">
+                  Link (Optional)
+                </h3>
+                <input
+                  type="url"
+                  placeholder="https://example.com"
+                  value={selectedComponent.props.link || ""}
+                  onChange={(e) =>
+                    updateComponentProp(selectedId, "link", e.target.value)
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  Leave empty for plain text. Enter a full URL (e.g.,
+                  https://example.com).
+                </p>
+              </div>
+            </div>
 
-      <h3 className="text-sm font-bold mb-4 text-gray-800 uppercase">
-        Line Height
-      </h3>
-      <select
-        value={selectedComponent.props.lineHeight || "1.5"}
-        onChange={(e) =>
-          updateComponentProp(selectedId, "lineHeight", e.target.value)
-        }
-        className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
-      >
-        <option value="1">1</option>
-        <option value="1.2">1.2</option>
-        <option value="1.5">1.5</option>
-        <option value="1.8">1.8</option>
-        <option value="2">2</option>
-      </select>
-       <div>
-      <h3 className="text-sm font-bold mb-4 text-gray-800 uppercase">
-        Link (Optional)
-      </h3>
-      <input
-        type="url"  
-        placeholder="https://example.com"
-        value={selectedComponent.props.link || ""}
-        onChange={(e) =>
-          updateComponentProp(selectedId, "link", e.target.value)
-        }
-        className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
-      />
-      <p className="text-xs text-gray-500 mt-1">
-        Leave empty for plain text. Enter a full URL (e.g., https://example.com).
-      </p>
-    </div>
-    </div>
-
-    <div>
-      <h3 className="text-sm font-bold mb-4 text-gray-800 uppercase">
-        Letter Spacing
-      </h3>
-      <select
-        value={selectedComponent.props.letterSpacing || "0px"}
-        onChange={(e) =>
-          updateComponentProp(selectedId, "letterSpacing", e.target.value)
-        }
-        className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
-      >
-        <option value="0px">0px (Normal)</option>
-        <option value="0.5px">0.5px</option>
-        <option value="1px">1px</option>
-        <option value="2px">2px</option>
-        <option value="0.05em">0.05em</option>
-        <option value="0.1em">0.1em</option>
-      </select>
-    </div>
+            <div>
+              <h3 className="text-sm font-bold mb-4 text-gray-800 uppercase">
+                Letter Spacing
+              </h3>
+              <select
+                value={selectedComponent.props.letterSpacing || "0px"}
+                onChange={(e) =>
+                  updateComponentProp(
+                    selectedId,
+                    "letterSpacing",
+                    e.target.value
+                  )
+                }
+                className="w-full px-3 py-2 border border-gray-300 rounded text-sm">
+                <option value="0px">0px (Normal)</option>
+                <option value="0.5px">0.5px</option>
+                <option value="1px">1px</option>
+                <option value="2px">2px</option>
+                <option value="0.05em">0.05em</option>
+                <option value="0.1em">0.1em</option>
+              </select>
+            </div>
 
             <div>
               <h3 className="text-sm font-bold mb-4 text-gray-800 uppercase">
@@ -314,40 +313,8 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
             </div>
           </div>
         )}
- {selectedComponent && selectedComponent.type === "list" && (
+        {selectedComponent && selectedComponent.type === "list" && (
           <div className="space-y-6">
-            <div>
-              <h3 className="text-sm font-bold mb-4 text-gray-800 uppercase">
-                List Type
-              </h3>
-              <div className="flex gap-2">
-                <button
-                  onClick={() =>
-                    updateComponentProp(selectedId, "listType", "unordered")
-                  }
-                  className={`flex-1 px-3 py-2 border rounded flex items-center justify-center ${
-                    selectedComponent.props.listType === "unordered"
-                      ? "bg-purple-500 text-white border-purple-500"
-                      : "border-gray-300 hover:bg-gray-50"
-                  }`}
-                >
-                  <span className="text-lg">☰</span>
-                </button>
-                <button
-                  onClick={() =>
-                    updateComponentProp(selectedId, "listType", "ordered")
-                  }
-                  className={`flex-1 px-3 py-2 border rounded flex items-center justify-center ${
-                    selectedComponent.props.listType === "ordered"
-                      ? "bg-purple-500 text-white border-purple-500"
-                      : "border-gray-300 hover:bg-gray-50"
-                  }`}
-                >
-                  <span className="text-lg">≡</span>
-                </button>
-              </div>
-            </div>
-
             <div>
               <h3 className="text-sm font-bold mb-4 text-gray-800 uppercase">
                 List Style Type
@@ -355,10 +322,13 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
               <select
                 value={selectedComponent.props.listStyleType || "disc"}
                 onChange={(e) =>
-                  updateComponentProp(selectedId, "listStyleType", e.target.value)
+                  updateComponentProp(
+                    selectedId,
+                    "listStyleType",
+                    e.target.value
+                  )
                 }
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
-              >
+                className="w-full px-3 py-2 border border-gray-300 rounded text-sm">
                 <option value="disc">Default</option>
                 <option value="circle">Circle</option>
                 <option value="square">Square</option>
@@ -375,12 +345,13 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                 Font Family
               </h3>
               <select
-                value={selectedComponent.props.fontFamily || "Arial, sans-serif"}
+                value={
+                  selectedComponent.props.fontFamily || "Arial, sans-serif"
+                }
                 onChange={(e) =>
                   updateComponentProp(selectedId, "fontFamily", e.target.value)
                 }
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
-              >
+                className="w-full px-3 py-2 border border-gray-300 rounded text-sm">
                 <option value="inherit">Global font</option>
                 <option value="Arial, sans-serif">Arial</option>
                 <option value="Helvetica, sans-serif">Helvetica</option>
@@ -399,8 +370,7 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                 onChange={(e) =>
                   updateComponentProp(selectedId, "fontWeight", e.target.value)
                 }
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
-              >
+                className="w-full px-3 py-2 border border-gray-300 rounded text-sm">
                 <option value="lighter">Regular</option>
                 <option value="normal">Normal</option>
                 <option value="bold">Bold</option>
@@ -421,8 +391,7 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                       Math.max(8, (selectedComponent.props.fontSize || 16) - 1)
                     )
                   }
-                  className="px-3 py-2 border border-gray-300 rounded hover:bg-gray-50"
-                >
+                  className="px-3 py-2 border border-gray-300 rounded hover:bg-gray-50">
                   −
                 </button>
                 <input
@@ -443,8 +412,7 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                       Math.min(72, (selectedComponent.props.fontSize || 16) + 1)
                     )
                   }
-                  className="px-3 py-2 border border-gray-300 rounded hover:bg-gray-50"
-                >
+                  className="px-3 py-2 border border-gray-300 rounded hover:bg-gray-50">
                   +
                 </button>
               </div>
@@ -511,9 +479,8 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                     selectedComponent.props.alignment === "left"
                       ? "bg-purple-500 text-white border-purple-500"
                       : "border-gray-300 hover:bg-gray-50"
-                  }`}
-                >
-                  ☰
+                  }`}>
+                 <TextAlignStart/>
                 </button>
                 <button
                   onClick={() =>
@@ -523,9 +490,8 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                     selectedComponent.props.alignment === "center"
                       ? "bg-purple-500 text-white border-purple-500"
                       : "border-gray-300 hover:bg-gray-50"
-                  }`}
-                >
-                  ≡
+                  }`}>
+                 <TextAlignCenter/>
                 </button>
                 <button
                   onClick={() =>
@@ -535,9 +501,8 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                     selectedComponent.props.alignment === "right"
                       ? "bg-purple-500 text-white border-purple-500"
                       : "border-gray-300 hover:bg-gray-50"
-                  }`}
-                >
-                  ☰
+                  }`}>
+                  <TextAlignEnd/>
                 </button>
               </div>
             </div>
@@ -552,11 +517,13 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                     updateComponentProp(
                       selectedId,
                       "itemSpacing",
-                      Math.max(0, (selectedComponent.props.itemSpacing || 0) - 1)
+                      Math.max(
+                        0,
+                        (selectedComponent.props.itemSpacing || 0) - 1
+                      )
                     )
                   }
-                  className="px-3 py-2 border border-gray-300 rounded hover:bg-gray-50"
-                >
+                  className="px-3 py-2 border border-gray-300 rounded hover:bg-gray-50">
                   −
                 </button>
                 <input
@@ -565,7 +532,11 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                   max="50"
                   value={selectedComponent.props.itemSpacing || 0}
                   onChange={(e) =>
-                    updateComponentProp(selectedId, "itemSpacing", e.target.value)
+                    updateComponentProp(
+                      selectedId,
+                      "itemSpacing",
+                      e.target.value
+                    )
                   }
                   className="flex-1 px-3 py-2 border border-gray-300 rounded text-sm text-center"
                 />
@@ -574,11 +545,13 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                     updateComponentProp(
                       selectedId,
                       "itemSpacing",
-                      Math.min(50, (selectedComponent.props.itemSpacing || 0) + 1)
+                      Math.min(
+                        50,
+                        (selectedComponent.props.itemSpacing || 0) + 1
+                      )
                     )
                   }
-                  className="px-3 py-2 border border-gray-300 rounded hover:bg-gray-50"
-                >
+                  className="px-3 py-2 border border-gray-300 rounded hover:bg-gray-50">
                   +
                 </button>
               </div>
@@ -594,11 +567,13 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                     updateComponentProp(
                       selectedId,
                       "nestedIndent",
-                      Math.max(0, (selectedComponent.props.nestedIndent || 30) - 5)
+                      Math.max(
+                        0,
+                        (selectedComponent.props.nestedIndent || 30) - 5
+                      )
                     )
                   }
-                  className="px-3 py-2 border border-gray-300 rounded hover:bg-gray-50"
-                >
+                  className="px-3 py-2 border border-gray-300 rounded hover:bg-gray-50">
                   −
                 </button>
                 <input
@@ -608,7 +583,11 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                   step="5"
                   value={selectedComponent.props.nestedIndent || 30}
                   onChange={(e) =>
-                    updateComponentProp(selectedId, "nestedIndent", e.target.value)
+                    updateComponentProp(
+                      selectedId,
+                      "nestedIndent",
+                      e.target.value
+                    )
                   }
                   className="flex-1 px-3 py-2 border border-gray-300 rounded text-sm text-center"
                 />
@@ -617,11 +596,13 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                     updateComponentProp(
                       selectedId,
                       "nestedIndent",
-                      Math.min(100, (selectedComponent.props.nestedIndent || 30) + 5)
+                      Math.min(
+                        100,
+                        (selectedComponent.props.nestedIndent || 30) + 5
+                      )
                     )
                   }
-                  className="px-3 py-2 border border-gray-300 rounded hover:bg-gray-50"
-                >
+                  className="px-3 py-2 border border-gray-300 rounded hover:bg-gray-50">
                   +
                 </button>
               </div>
@@ -636,8 +617,7 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                 onChange={(e) =>
                   updateComponentProp(selectedId, "lineHeight", e.target.value)
                 }
-                className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
-              >
+                className="w-full px-3 py-2 border border-gray-300 rounded text-sm">
                 <option value="1">1</option>
                 <option value="1.2">1.2</option>
                 <option value="1.5">1.5</option>
@@ -656,11 +636,13 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                     updateComponentProp(
                       selectedId,
                       "letterSpacing",
-                      Math.max(-2, (selectedComponent.props.letterSpacing || 0) - 0.5)
+                      Math.max(
+                        -2,
+                        (selectedComponent.props.letterSpacing || 0) - 0.5
+                      )
                     )
                   }
-                  className="px-3 py-2 border border-gray-300 rounded hover:bg-gray-50"
-                >
+                  className="px-3 py-2 border border-gray-300 rounded hover:bg-gray-50">
                   −
                 </button>
                 <input
@@ -670,7 +652,11 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                   step="0.5"
                   value={selectedComponent.props.letterSpacing || 0}
                   onChange={(e) =>
-                    updateComponentProp(selectedId, "letterSpacing", e.target.value)
+                    updateComponentProp(
+                      selectedId,
+                      "letterSpacing",
+                      e.target.value
+                    )
                   }
                   className="flex-1 px-3 py-2 border border-gray-300 rounded text-sm text-center"
                 />
@@ -679,11 +665,13 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                     updateComponentProp(
                       selectedId,
                       "letterSpacing",
-                      Math.min(10, (selectedComponent.props.letterSpacing || 0) + 0.5)
+                      Math.min(
+                        10,
+                        (selectedComponent.props.letterSpacing || 0) + 0.5
+                      )
                     )
                   }
-                  className="px-3 py-2 border border-gray-300 rounded hover:bg-gray-50"
-                >
+                  className="px-3 py-2 border border-gray-300 rounded hover:bg-gray-50">
                   +
                 </button>
               </div>
@@ -852,8 +840,7 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                         e.target.value
                       )
                     }
-                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
-                  >
+                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm">
                     <option value="Arial, sans-serif">Arial</option>
                     <option value="Helvetica, sans-serif">Helvetica</option>
                     <option value="Times New Roman, serif">
@@ -892,8 +879,7 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                         e.target.value
                       )
                     }
-                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
-                  >
+                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm">
                     <option value="normal">Normal</option>
                     <option value="bold">Bold</option>
                     <option value="lighter">Lighter</option>
@@ -927,8 +913,7 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
                     onChange={(e) =>
                       updateComponentProp(selectedId, "align", e.target.value)
                     }
-                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
-                  >
+                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm">
                     <option value="left">Left</option>
                     <option value="center">Center</option>
                     <option value="right">Right</option>
@@ -957,8 +942,7 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
           </div>
         )}
 
-
-          {type === "paragraph" && (
+        {type === "paragraph" && (
           <>
             <div>
               <label className="block text-sm font-medium mb-1">Content</label>
@@ -970,7 +954,9 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Font Size</label>
+              <label className="block text-sm font-medium mb-1">
+                Font Size
+              </label>
               <input
                 type="number"
                 value={props.fontSize}
@@ -1011,7 +997,9 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Background Color</label>
+              <label className="block text-sm font-medium mb-1">
+                Background Color
+              </label>
               <input
                 type="color"
                 value={props.bgColor}
@@ -1020,7 +1008,9 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Text Color</label>
+              <label className="block text-sm font-medium mb-1">
+                Text Color
+              </label>
               <input
                 type="color"
                 value={props.textColor}
@@ -1034,7 +1024,9 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
         {type === "image" && (
           <>
             <div>
-              <label className="block text-sm font-medium mb-1">Width (px)</label>
+              <label className="block text-sm font-medium mb-1">
+                Width (px)
+              </label>
               <input
                 type="number"
                 value={props.width}
@@ -1043,7 +1035,9 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Height (px)</label>
+              <label className="block text-sm font-medium mb-1">
+                Height (px)
+              </label>
               <input
                 type="number"
                 value={props.height}
@@ -1057,11 +1051,15 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
         {type === "divider" && (
           <>
             <div>
-              <label className="block text-sm font-medium mb-1">Thickness (px)</label>
+              <label className="block text-sm font-medium mb-1">
+                Thickness (px)
+              </label>
               <input
                 type="number"
                 value={props.thickness}
-                onChange={(e) => onUpdate("thickness", parseInt(e.target.value))}
+                onChange={(e) =>
+                  onUpdate("thickness", parseInt(e.target.value))
+                }
                 className="w-full px-3 py-2 border rounded"
               />
             </div>
@@ -1075,7 +1073,9 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Width (%)</label>
+              <label className="block text-sm font-medium mb-1">
+                Width (%)
+              </label>
               <input
                 type="number"
                 value={props.width}
@@ -1090,7 +1090,9 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
 
         {type === "spacer" && (
           <div>
-            <label className="block text-sm font-medium mb-1">Height (px)</label>
+            <label className="block text-sm font-medium mb-1">
+              Height (px)
+            </label>
             <input
               type="number"
               value={props.height}
@@ -1105,4 +1107,3 @@ const RightPanel = ({ selectedComponent, selectedId, updateComponentProp }) => {
 };
 
 export default RightPanel;
-

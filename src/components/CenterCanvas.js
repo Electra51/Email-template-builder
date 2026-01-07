@@ -164,21 +164,83 @@ const CenterCanvas = ({
                   <div
                     style={{
                       padding: `${component.props.paddingTop}px 20px ${component.props.paddingBottom}px 20px`,
+                      textAlign: component.props.alignment || "left",
                     }}>
-                    <ul
-                      style={{
-                        fontSize: `${component.props.fontSize}px`,
-                        color: component.props.color,
-                        listStyleType: "disc",
-                        paddingLeft: "20px",
-                      }}>
-                      {component.props.items.map((item, idx) => (
-                        <li key={idx}>{item}</li>
-                      ))}
-                    </ul>
+                    {component.props.listType === "unordered" ? (
+                      <ul
+                        style={{
+                          fontFamily:
+                            component.props.fontFamily || "Arial, sans-serif",
+                          fontWeight: component.props.fontWeight || "normal",
+                          fontSize: `${component.props.fontSize}px`,
+                          color: component.props.textColor || "#101218",
+                          listStyleType:
+                            component.props.listStyleType || "disc",
+                          paddingLeft:
+                            component.props.alignment === "center"
+                              ? "0"
+                              : "20px",
+                          lineHeight: component.props.lineHeight || "1.2",
+                          letterSpacing: `${
+                            component.props.letterSpacing || 0
+                          }px`,
+                          display:
+                            component.props.alignment === "center"
+                              ? "inline-block"
+                              : "block",
+                          textAlign: "left",
+                        }}>
+                        {component.props.items.map((item, idx) => (
+                          <li
+                            key={idx}
+                            style={{
+                              marginBottom: `${
+                                component.props.itemSpacing || 0
+                              }px`,
+                            }}>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <ol
+                        style={{
+                          fontFamily:
+                            component.props.fontFamily || "Arial, sans-serif",
+                          fontWeight: component.props.fontWeight || "normal",
+                          fontSize: `${component.props.fontSize}px`,
+                          color: component.props.textColor || "#101218",
+                          listStyleType:
+                            component.props.listStyleType || "decimal",
+                          paddingLeft:
+                            component.props.alignment === "center"
+                              ? "0"
+                              : "20px",
+                          lineHeight: component.props.lineHeight || "1.2",
+                          letterSpacing: `${
+                            component.props.letterSpacing || 0
+                          }px`,
+                          display:
+                            component.props.alignment === "center"
+                              ? "inline-block"
+                              : "block",
+                          textAlign: "left",
+                        }}>
+                        {component.props.items.map((item, idx) => (
+                          <li
+                            key={idx}
+                            style={{
+                              marginBottom: `${
+                                component.props.itemSpacing || 0
+                              }px`,
+                            }}>
+                            {item}
+                          </li>
+                        ))}
+                      </ol>
+                    )}
                   </div>
                 )}
-
                 {component.type === "image" && (
                   <div
                     style={{
