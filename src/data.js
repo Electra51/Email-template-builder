@@ -1,0 +1,85 @@
+export const getDefaultProps = (type) => {
+  const defaults = {
+    title: {
+      content: "I'm a new title block",
+      fontSize: "32",
+      color: "#1a1a5e",
+      fontWeight: "bold",
+      alignment: "center",
+      paddingTop: "20",
+      paddingBottom: "20",
+      lineHeight: "1.5",
+      letterSpacing: "0px",
+      link: "",
+    },
+    paragraph: {
+      content:
+        "I'm a new paragraph block. Click to edit this text and customize the styling.",
+      fontSize: "16",
+      color: "#333333",
+      alignment: "left",
+      paddingTop: "10",
+      paddingBottom: "10",
+      lineHeight: "1.6",
+    },
+    list: {
+      items: ["List item 1", "List item 2", "List item 3"],
+      fontSize: "16",
+      color: "#333333",
+      paddingTop: "10",
+      paddingBottom: "10",
+    },
+    image: {
+      url: "https://via.placeholder.com/600x200/e0e0e0/666?text=Drop+your+file+here",
+      linkUrl: "",
+      width: "600",
+      height: "200",
+      alignment: "center",
+    },
+    button: {
+      text: "Button",
+      linkUrl: "#",
+      bgColor: "#7c3aed",
+      textColor: "#ffffff",
+      borderRadius: "4",
+      paddingX: "30",
+      paddingY: "12",
+    },
+    table: {
+      rows: 3,
+      cols: 3,
+      headerBg: "#7c3aed",
+      headerText: "#ffffff",
+      cellBg: "#ffffff",
+      cellText: "#333333",
+      border: "1px solid #ddd",
+      backgroundColor: "#ffffff",
+      fontFamily: "Arial, sans-serif",
+      fontColor: "#333333",
+      fontWeight: "normal",
+      fontSize: "14",
+      align: "left",
+    },
+    divider: {
+      color: "#e5e7eb",
+      thickness: "1",
+      width: "100",
+      paddingTop: "20",
+      paddingBottom: "20",
+    },
+    spacer: {
+      height: "40",
+    },
+    social: {
+      icons: ["facebook", "twitter", "instagram", "linkedin"],
+      iconSize: "32",
+      spacing: "10",
+    },
+    row: {
+      cols: 2,
+      bgColor: "#ffffff",
+      columns: [],
+    },
+  };
+  return defaults[type] || {};
+};

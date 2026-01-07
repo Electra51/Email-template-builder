@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import LeftPanel from "./LeftPanel";
 import TopBar from "./TopBar";
 import CenterCanvas from "./CenterCanvas";
 import RightPanel from "./RightPanel";
+import { getDefaultProps } from "../data";
 
 const EmailTemplateBuilder = () => {
   const [components, setComponents] = useState([]);
@@ -12,94 +13,9 @@ const EmailTemplateBuilder = () => {
   const [templateName, setTemplateName] = useState("My Email Template");
   const [draggedItem, setDraggedItem] = useState(null);
   const [dragOverIndex, setDragOverIndex] = useState(null);
-
   const [viewMode, setViewMode] = useState("desktop");
   const [history, setHistory] = useState([[]]);
   const [historyIndex, setHistoryIndex] = useState(0);
-
-  // Default properties
-  const getDefaultProps = (type) => {
-    const defaults = {
-      title: {
-        content: "I'm a new title block",
-        fontSize: "32",
-        color: "#1a1a5e",
-        fontWeight: "bold",
-        alignment: "center",
-        paddingTop: "20",
-        paddingBottom: "20",
-      },
-      paragraph: {
-        content:
-          "I'm a new paragraph block. Click to edit this text and customize the styling.",
-        fontSize: "16",
-        color: "#333333",
-        alignment: "left",
-        paddingTop: "10",
-        paddingBottom: "10",
-        lineHeight: "1.6",
-      },
-      list: {
-        items: ["List item 1", "List item 2", "List item 3"],
-        fontSize: "16",
-        color: "#333333",
-        paddingTop: "10",
-        paddingBottom: "10",
-      },
-      image: {
-        url: "https://via.placeholder.com/600x200/e0e0e0/666?text=Drop+your+file+here",
-        linkUrl: "",
-        width: "600",
-        height: "200",
-        alignment: "center",
-      },
-      button: {
-        text: "Button",
-        linkUrl: "#",
-        bgColor: "#7c3aed",
-        textColor: "#ffffff",
-        borderRadius: "4",
-        paddingX: "30",
-        paddingY: "12",
-      },
-      table: {
-        rows: 3,
-        cols: 3,
-        headerBg: "#7c3aed",
-        headerText: "#ffffff",
-        cellBg: "#ffffff",
-        cellText: "#333333",
-        border: "1px solid #ddd", // New: Border style
-        backgroundColor: "#ffffff", // New: Overall background
-        fontFamily: "Arial, sans-serif", // New: Font family
-        fontColor: "#333333", // New: Font color (alias for cellText)
-        fontWeight: "normal", // New: Font weight
-        fontSize: "14", // New: Font size
-        align: "left", // New: Text alignment
-      },
-      divider: {
-        color: "#e5e7eb",
-        thickness: "1",
-        width: "100",
-        paddingTop: "20",
-        paddingBottom: "20",
-      },
-      spacer: {
-        height: "40",
-      },
-      social: {
-        icons: ["facebook", "twitter", "instagram", "linkedin"],
-        iconSize: "32",
-        spacing: "10",
-      },
-      row: {
-        cols: 2,
-        bgColor: "#ffffff",
-        columns: [],
-      },
-    };
-    return defaults[type] || {};
-  };
 
   const handleDragLeave = (e) => {
     e.preventDefault();
@@ -110,48 +26,58 @@ const EmailTemplateBuilder = () => {
     e.preventDefault();
     e.stopPropagation();
 
-    let dragData = draggedItem;
+    if (!draggedItem) return;
 
-    if (!dragData) {
-      try {
-        dragData = JSON.parse(e.dataTransfer.getData("text/plain"));
-      } catch (err) {
-        return;
-      }
-    }
+    const newComponents = [...components];
 
-    if (!dragData) return;
-    if (dragData.source === "library") {
+    if (draggedItem.source === "library") {
       let newComponent;
-      if (dragData.item.type === "row") {
+      if (draggedItem.item.type === "row") {
         newComponent = {
           id: Date.now(),
           type: "row",
           props: {
             ...getDefaultProps("row"),
-            cols: dragData.item.cols,
-            columns: Array(dragData.item.cols).fill([]),
+            cols: draggedItem.item.cols,
+            columns: Array(draggedItem.item.cols).fill([]),
           },
         };
       } else {
         newComponent = {
           id: Date.now(),
-          type: dragData.item.type,
-          props: getDefaultProps(dragData.item.type),
+          type: draggedItem.item.type,
+          props: getDefaultProps(draggedItem.item.type),
         };
       }
-      const newComponents = [...components];
       newComponents.splice(dropIndex, 0, newComponent);
       setComponents(newComponents);
-      saveToHistory(newComponents); // Save to history
+      saveToHistory(newComponents);
       setSelectedId(newComponent.id);
+    } else if (draggedItem.source === "canvas") {
+      const dragIndex = draggedItem.index;
+
+      if (dragIndex !== dropIndex) {
+        const [movedComponent] = newComponents.splice(dragIndex, 1);
+
+        const adjustedDropIndex =
+          dragIndex < dropIndex ? dropIndex - 1 : dropIndex;
+
+        newComponents.splice(adjustedDropIndex, 0, movedComponent);
+
+        setComponents(newComponents);
+        saveToHistory(newComponents);
+      }
     }
 
     setDraggedItem(null);
     setDragOverIndex(null);
   };
 
-  // History management
+  const handleDragEnd = () => {
+    setDraggedItem(null);
+    setDragOverIndex(null);
+  };
+
   const saveToHistory = (newComponents) => {
     const newHistory = history.slice(0, historyIndex + 1);
     newHistory.push(newComponents);
@@ -173,7 +99,26 @@ const EmailTemplateBuilder = () => {
     }
   };
 
-  // Component operations
+  const handleCanvasDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!draggedItem || draggedItem.source !== "library") return;
+
+    const newComponent = {
+      id: Date.now(),
+      type: draggedItem.item.type,
+      props: getDefaultProps(draggedItem.item.type),
+    };
+
+    const newComponents = [...components, newComponent];
+    setComponents(newComponents);
+    saveToHistory(newComponents);
+    setSelectedId(newComponent.id);
+    setDraggedItem(null);
+    setDragOverIndex(null);
+  };
+
   const deleteComponent = (id) => {
     const newComponents = components.filter((c) => c.id !== id);
     setComponents(newComponents);
@@ -187,12 +132,14 @@ const EmailTemplateBuilder = () => {
       const newComponent = {
         ...component,
         id: Date.now(),
+        props: { ...component.props },
       };
       const index = components.findIndex((c) => c.id === id);
       const newComponents = [...components];
       newComponents.splice(index + 1, 0, newComponent);
       setComponents(newComponents);
       saveToHistory(newComponents);
+      setSelectedId(newComponent.id);
     }
   };
 
@@ -201,11 +148,10 @@ const EmailTemplateBuilder = () => {
       c.id === id ? { ...c, props: { ...c.props, [prop]: value } } : c
     );
     setComponents(newComponents);
+    saveToHistory(newComponents);
   };
-
-  // Drag and drop handlers
   const handleDragStart = (e, item, index) => {
-    const source = index !== undefined ? "canvas" : "library"; //fixed syntax
+    const source = index !== undefined ? "canvas" : "library";
     const dragData = { item, index, source };
     setDraggedItem(dragData);
     e.dataTransfer.effectAllowed = "move";
@@ -221,48 +167,6 @@ const EmailTemplateBuilder = () => {
     e.dataTransfer.dropEffect = "move";
   };
 
-  const handleCanvasDrop = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    let dragData = draggedItem;
-
-    if (!dragData) {
-      try {
-        dragData = JSON.parse(e.dataTransfer.getData("text/plain"));
-      } catch (err) {
-        return;
-      }
-    }
-
-    if (!dragData || dragData.source !== "library") return;
-
-    if (dragData.source === "library") {
-      let newComponent;
-      if (dragData.item.type === "row") {
-        newComponent = {
-          id: Date.now(),
-          type: "row",
-          props: {
-            ...getDefaultProps("row"),
-            cols: dragData.item.cols,
-            columns: Array(dragData.item.cols).fill([]),
-          },
-        };
-      } else {
-        newComponent = {
-          id: Date.now(),
-          type: dragData.item.type,
-          props: getDefaultProps(dragData.item.type),
-        };
-      }
-      setComponents([...components, newComponent]);
-      saveToHistory([...components, newComponent]);
-      setSelectedId(newComponent.id);
-    }
-  };
-
-  // Add row layout
   const addRowLayout = (cols) => {
     const newComponent = {
       id: Date.now(),
@@ -375,29 +279,43 @@ ${components.map(generateHTML).join("\n")}
         handleDragStart={handleDragStart}
         addRowLayout={addRowLayout}
       />
-
-      <CenterCanvas
-        components={components}
-        selectedId={selectedId}
-        setSelectedId={setSelectedId}
-        draggedItem={draggedItem}
-        dragOverIndex={dragOverIndex}
-        handleDragStart={handleDragStart}
-        handleDragOver={handleDragOver}
-        templateName={templateName}
-        handleDragLeave={handleDragLeave}
-        handleDrop={handleDrop}
-        undo={undo}
-        redo={redo}
-        exportHTML={exportHTML}
-        historyIndex={historyIndex}
-        viewMode={viewMode}
-        handleCanvasDragOver={handleCanvasDragOver}
-        handleCanvasDrop={handleCanvasDrop}
-        duplicateComponent={duplicateComponent}
-        deleteComponent={deleteComponent}
-        updateComponentProp={updateComponentProp}
-      />
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <TopBar
+          templateName={templateName}
+          setTemplateName={setTemplateName}
+          exportHTML={exportHTML}
+          historyIndex={historyIndex}
+          history={history}
+          setViewMode={setViewMode}
+          undo={undo}
+          redo={redo}
+          viewMode={viewMode}
+        />
+        <CenterCanvas
+          components={components}
+          selectedId={selectedId}
+          setSelectedId={setSelectedId}
+          draggedItem={draggedItem}
+          dragOverIndex={dragOverIndex}
+          handleDragStart={handleDragStart}
+          handleDragOver={handleDragOver}
+          templateName={templateName}
+          handleDragLeave={handleDragLeave}
+          handleDrop={handleDrop}
+          undo={undo}
+          redo={redo}
+          exportHTML={exportHTML}
+          history={history}
+          historyIndex={historyIndex}
+          viewMode={viewMode}
+          handleCanvasDragOver={handleCanvasDragOver}
+          handleCanvasDrop={handleCanvasDrop}
+          duplicateComponent={duplicateComponent}
+          deleteComponent={deleteComponent}
+          updateComponentProp={updateComponentProp}
+          handleDragEnd={handleDragEnd}
+        />
+      </div>
 
       <RightPanel
         selectedComponent={selectedComponent}

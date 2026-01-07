@@ -4,7 +4,6 @@ import {
   Square,
   Table,
   AlignLeft,
-  MessageSquare,
   Minus,
   Image,
   List,
